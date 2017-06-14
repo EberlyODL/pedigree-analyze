@@ -1,0 +1,112 @@
+<link rel="import" href="../lrndesign-animationctrl/lrndesign-animationctrl.html">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
+
+<dom-module id="pedigree-analyze-4">
+    <template>
+        <style>
+             :host {
+                display: block;
+            }
+        </style>
+
+        <lrndesign-animationctrl>
+            <lrndesign-animationctrl-button name="play" icon="media"></lrndesign-animationctrl-button>
+            <lrndesign-animationctrl-button name="replay" icon="media"></lrndesign-animationctrl-button>
+        </lrndesign-animationctrl>
+
+        <p>If the couple was to have a third child - what is the probability that the child will have the disease?</p>
+
+        <svg id="pedigrees" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 630 252.03">
+            <title>Pedigree</title>
+            <g id="linefour">
+                <polyline points="315.69 140.74 407.69 140.74 407.69 168.74" fill="none" stroke="#b3b3b3" stroke-miterlimit="10" stroke-width="4"
+                />
+            </g>
+            <g id="linethree">
+                <line x1="314.69" y1="140.24" x2="314.69" y2="166.24" fill="none" stroke="#b3b3b3" stroke-miterlimit="10" stroke-width="4"
+                />
+            </g>
+            <g id="linetwo">
+                <polyline points="314.69 73.74 314.69 140.74 222.19 140.74 222.19 168.74" fill="none" stroke="#b3b3b3" stroke-miterlimit="10"
+                    stroke-width="4" />
+            </g>
+            <g id="lineone">
+                <line x1="265.02" y1="72.91" x2="362.69" y2="72.91" fill="none" stroke="#b3b3b3" stroke-miterlimit="10" stroke-width="4"
+                />
+            </g>
+            <g id="stepfive">
+                <text transform="translate(401.22 204.78)" font-size="36.1" fill="#24aaa6" font-family="OpenSans, Open Sans">?</text>
+            </g>
+            <g id="stepfour">
+                <rect x="288.2" y="166.68" width="54" height="54" fill="#231f20" />
+                <text transform="translate(295.05 202.28)" font-size="36.1" fill="#fff" font-family="OpenSans, Open Sans">aa</text>
+            </g>
+            <g id="stepthree">
+                <circle cx="222.52" cy="192.68" r="27" fill="#24aaa6" />
+                <text transform="translate(216.05 204.78)" font-size="36.1" fill="#fff" font-family="OpenSans, Open Sans">?</text>
+            </g>
+            <g id="steptwo">
+                <circle cx="388.02" cy="73.18" r="27" fill="#24aaa6" />
+                <text transform="translate(368.05 81.78)" font-size="36.1" fill="#fff" font-family="OpenSans, Open Sans">Aa</text>
+            </g>
+            <g id="stepone">
+                <rect x="211.2" y="46.18" width="54" height="54" fill="#24aaa6" />
+                <text transform="translate(217.05 81.78)" font-size="36.1" fill="#fff" font-family="OpenSans, Open Sans">Aa</text>
+            </g>
+        </svg>
+
+    </template>
+    <script>
+        Polymer({
+            is: 'pedigree-analyze-4',
+
+            properties: {
+                tl: {
+                    type: Object
+                },
+            },
+
+            ready: function () {
+                var root = this;
+                var tl = new TimelineMax();
+                var playButton = this.$$('#play-button');
+                var replayButton = this.$$('#replay-button');
+                var svg = this.$$('#pedigrees');
+
+                // SVG
+                var linefour = svg.getElementById('linefour');
+                var stepfive = svg.getElementById('stepfive');
+
+                // Set Animate
+                tl.set([linefour, stepfive], {
+                    alpha: 0
+                });
+
+                // Start Animate
+                tl.to([linefour], 1, {
+                        alpha: 1
+                    })
+                    .to([stepfive], 1, {
+                        alpha: 1
+                    });
+
+                tl.pause();
+
+                // listen for button clicks and play and pause the animation
+                this.$$('lrndesign-animationctrl').addEventListener('lrndesign-animationctrl-click',
+                    function (e) {
+                        var name = e.detail.button;
+                        if (name === 'play') {
+                            tl.play();
+                        }
+                        if (name === 'replay') {
+                            tl.progress(0);
+                            tl.pause();
+                        }
+                    });
+
+
+            }
+        });
+    </script>
+</dom-module>

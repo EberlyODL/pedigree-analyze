@@ -1,0 +1,83 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-pages/iron-pages.html">
+<link rel="import" href="../paper-stepper/paper-stepper.html">
+<link rel="import" href="pedigree-analyze-1.html">
+<link rel="import" href="pedigree-analyze-2.html">
+<link rel="import" href="pedigree-analyze-3.html">
+<link rel="import" href="pedigree-analyze-4.html">
+<link rel="import" href="pedigree-analyze-5.html">
+<link rel="import" href="pedigree-analyze-6.html">
+<link rel="import" href="pedigree-analyze-7.html">
+
+<!--
+`pedigree-analyze`
+
+
+@demo demo/index.html
+-->
+
+<dom-module id="pedigree-analyze">
+  <template>
+    <style>
+       :host {
+        display: block;
+      }
+    </style>
+    <!--Pages-->
+    <iron-pages selected="[[activePage]]">
+      <pedigree-analyze-1></pedigree-analyze-1>
+      <pedigree-analyze-2></pedigree-analyze-2>
+      <pedigree-analyze-3></pedigree-analyze-3>
+      <pedigree-analyze-4></pedigree-analyze-4>
+      <pedigree-analyze-5></pedigree-analyze-5>
+      <pedigree-analyze-6></pedigree-analyze-6>
+      <pedigree-analyze-7></pedigree-analyze-7>
+
+    </iron-pages>
+
+    <!--Counter-->
+    <template is="dom-if" if="[[count]]">
+      <paper-stepper selected="{{activePage}}" progress-bar>
+        <template is="dom-repeat" items="[[_countToArray(count)]]">
+          <paper-step></paper-step>
+        </template>
+      </paper-stepper>
+    </template>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'pedigree-analyze',
+      properties: {
+        activePage: {
+          type: String,
+          value: 0
+        },
+        count: {
+          type: Number,
+          value: 0
+        }
+      },
+      _countToArray: function (count) {
+        var array = [];
+        if (count) {
+          for (i = 0; i < count; i++) {
+            array.push(i);
+          }
+        }
+        console.log(array);
+        return array;
+      },
+      ready: function () {
+        var root = this;
+        var ironPages = root.$$('iron-pages');
+        if (ironPages.children) {
+          if (ironPages.children.length) {
+            root.count = ironPages.children.length;
+          }
+        }
+      }
+    });
+  </script>
+</dom-module>
