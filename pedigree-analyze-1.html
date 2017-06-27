@@ -1,11 +1,29 @@
 <link rel="import" href="../lrndesign-animationctrl/lrndesign-animationctrl.html">
 <link rel="import" href="../greensock-cdn/greensock-cdn.html">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
 <dom-module id="pedigree-analyze-1">
     <template>
         <style>
              :host {
                 display: block;
+            }
+
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+                font-family: 'Open Sans', sans-serif;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                color: #6D6E71;
+                text-align: center;
+            }
+
+            p {
+                font-family: 'Open Sans', sans-serif;
             }
         </style>
 
@@ -14,7 +32,7 @@
             <lrndesign-animationctrl-button name="replay" icon="replay"></lrndesign-animationctrl-button>
         </lrndesign-animationctrl>
 
-
+        <h1>Pedigree Analysis</h1>
         <p>This animation will show you how to use a pedigree to analyze the transmission of genetic traits (in this case the
             recessive genetic disease alkaptonuria) between parents and offspring.</p>
         <p>Squares represent males and circles represent females. Each parent is a carrier of the disease - neither has the

@@ -1,11 +1,30 @@
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
 <dom-module id="pedigree-analyze-6">
     <template>
         <style>
              :host {
                 display: block;
             }
-        </style>
 
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+                font-family: 'Open Sans', sans-serif;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                color: #6D6E71;
+                text-align: center;
+            }
+
+            p {
+                font-family: 'Open Sans', sans-serif;
+            }
+        </style>
+        <h1>Pedigree Analysis</h1>
         <p>What is the probability that the first child is a heterozygote?</p>
 
         <svg id="pedigrees" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 630 252.03">
